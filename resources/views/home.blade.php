@@ -15,6 +15,10 @@
                     @endif
 
                     You are logged in!
+                    <form method="post" action="/trigger" id="trigger-event">
+                        @csrf
+                        <button>Trigger event</button>
+                    </form>
                 </div>
             </div>
         </div>

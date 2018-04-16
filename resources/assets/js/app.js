@@ -20,3 +20,14 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+$('#trigger-event').submit(function(e) {
+    e.preventDefault();
+    data = $(e.target).serialize();
+    $.post(e.target.action, data);
+});
+
+Echo.channel(`public_messages`)
+    .listen('EmitScriptOutput', (e) => {
+        console.log(e.data);
+    });
