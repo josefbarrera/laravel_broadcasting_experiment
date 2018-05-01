@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Events\EmitScriptOutput;
+use App\Models\BashScript;
 
 class HomeController extends Controller
 {
@@ -31,10 +32,10 @@ class HomeController extends Controller
     /**
      * Used to trigger a test event
      */
-    public function trigger()
+    public function scanRepo()
     {
-        $data = json_encode(['message' => 'triggered EmitScriptOutput']);
-        event(new EmitScriptOutput($data));
+        $script = new BashScript();
+        $script->execute();
         return "ok";
     }
 }

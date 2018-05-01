@@ -15,9 +15,9 @@
                     @endif
 
                     You are logged in!
-                    <form method="post" action="/trigger" id="trigger-event">
+                    <form method="post" action="/scan" id="scan-repo">
                         @csrf
-                        <button>Trigger event</button>
+                        <button>Scan repository</button>
                     </form>
                 </div>
             </div>
