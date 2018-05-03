@@ -11,8 +11,16 @@ use Symfony\Component\Process\Exception\ProcessTimedOutException;
 class BashScript extends Model
 {
     public function execute() {
-        $data = json_encode(['message' => 'Scan started']);
+        $data = [
+            'type' => 'start',
+            'content' => 'Scan started'
+        ];
         event(new EmitScriptOutput($data));
         //$process = (new Process())->setTimeout(null);
+        $data = [
+            'type' => 'end',
+            'content' => 'Scan finished'
+        ];
+        event(new EmitScriptOutput($data));
     }
 }

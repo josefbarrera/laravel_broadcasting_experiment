@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div id="messages-board" class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -17,10 +17,15 @@
                     You are logged in!
                     <form method="post" action="/scan" id="scan-repo">
                         @csrf
-                        <button>Scan repository</button>
+                        <button :disabled="disabled" class="btn btn-primary">
+                            Scan repository
+                        </button>
                     </form>
                 </div>
             </div>
+            <messages-board
+                v-bind:messages="messages" >
+            </messages-board>
         </div>
     </div>
 </div>

@@ -15,19 +15,31 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//Vue.component('example-component', require('./components/ExampleComponent.vue'));
-//
-//const app = new Vue({
-//    el: '#app'
-//});
+Vue.component('messages-board', require('./components/MessagesBoard.vue'));
+
+const app = new Vue({
+    el: '#messages-board',
+    data: {
+        messages: [],
+        disabled: null,
+    },
+    mounted: function () {
+        Echo.channel(`public_messages`)
+            .listen('EmitScriptOutput', (e) => {
+                this.messages.push(e.data);
+                switch (e.data.type) {
+                    case "end":
+                    case "error":
+                        this.disabled = null;
+                        break;
+                }
+            });
+    }
+});
 
 var form = document.getElementById('scan-repo');
 form.addEventListener('submit', function(e) {
     e.preventDefault();
+    app.disabled = 1;
     window.axios.post(form.action);
 });
-
-Echo.channel(`public_messages`)
-    .listen('EmitScriptOutput', (e) => {
-        console.log(e.data);
-    });
