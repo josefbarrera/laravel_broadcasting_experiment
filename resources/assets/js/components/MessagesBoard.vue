@@ -3,9 +3,9 @@
         <div class="card-header">Messages</div>
 
         <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item" v-for="message in messages">
-                    {{ message.content.trim() }}
+            <ul class="messages-list list-group">
+                <li class="list-group-item" :class="alertType(message.type)" v-for="message in messages">
+                    <span class="badge badge-secondary">{{ message.date}}</span> {{ message.content.trim() }}
                 </li>
             </ul>
         </div>
@@ -15,5 +15,24 @@
 <script>
     export default {
         props: ['messages'],
+        methods: {
+            alertType: function(type) {
+                var type_class = "list-group-item-";
+                switch (type) {
+                    case "start":
+                        type_class += "primary";
+                        break;
+                    case "end":
+                        type_class += "success";
+                        break;
+                    case "error":
+                        type_class += "danger";
+                        break;
+                    default:
+                        type_class += "info";
+                }
+                return type_class;
+            }
+        },
     }
 </script>

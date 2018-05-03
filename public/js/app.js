@@ -54549,7 +54549,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['messages']
+    props: ['messages'],
+    methods: {
+        alertType: function alertType(type) {
+            var type_class = "list-group-item-";
+            switch (type) {
+                case "start":
+                    type_class += "primary";
+                    break;
+                case "end":
+                    type_class += "success";
+                    break;
+                case "error":
+                    type_class += "danger";
+                    break;
+                default:
+                    type_class += "info";
+            }
+            return type_class;
+        }
+    }
 });
 
 /***/ }),
@@ -54566,15 +54585,21 @@ var render = function() {
     _c("div", { staticClass: "card-body" }, [
       _c(
         "ul",
-        { staticClass: "list-group" },
+        { staticClass: "messages-list list-group" },
         _vm._l(_vm.messages, function(message) {
-          return _c("li", { staticClass: "list-group-item" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(message.content.trim()) +
-                "\n            "
-            )
-          ])
+          return _c(
+            "li",
+            {
+              staticClass: "list-group-item",
+              class: _vm.alertType(message.type)
+            },
+            [
+              _c("span", { staticClass: "badge badge-secondary" }, [
+                _vm._v(_vm._s(message.date))
+              ]),
+              _vm._v(" " + _vm._s(message.content.trim()) + "\n            ")
+            ]
+          )
         })
       )
     ])

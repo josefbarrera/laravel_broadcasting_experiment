@@ -24,7 +24,7 @@
                 </div>
             </div>
             <messages-board
-                v-bind:messages="messages" >
+                v-bind:messages="messages">
             </messages-board>
         </div>
     </div>
