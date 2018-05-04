@@ -17246,9 +17246,8 @@ var app = new Vue({
                     _this.disabled = 1;
             }
         });
-        var vm = this;
         window.axios.get('/messages').then(function (response) {
-            vm.messages = response.data;
+            app.messages = response.data;
         });
     }
 });
@@ -17259,6 +17258,17 @@ form.addEventListener('submit', function (e) {
     app.disabled = 1;
     window.axios.post(form.action);
 });
+
+// Logic to auto-scroll messages list when its contents change
+var messages_list = document.querySelector('.messages-list');
+var observer = new MutationObserver(scrollToBottom);
+// Tell observer to look for new children that will change the height.
+var config = { childList: true };
+observer.observe(messages_list, config);
+
+function scrollToBottom() {
+    messages_list.scrollTop = messages_list.scrollHeight;
+}
 
 /***/ }),
 /* 34 */
