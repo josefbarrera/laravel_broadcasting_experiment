@@ -20,7 +20,7 @@
                 var type_class = "list-group-item-";
                 switch (type) {
                     case "start":
-                        type_class += "primary";
+                        type_class += "info";
                         break;
                     case "end":
                         type_class += "success";
@@ -29,7 +29,7 @@
                         type_class += "danger";
                         break;
                     default:
-                        type_class += "info";
+                        type_class += "primary";
                 }
                 return type_class;
             }

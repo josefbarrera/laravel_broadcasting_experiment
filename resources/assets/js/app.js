@@ -32,7 +32,14 @@ const app = new Vue({
                     case "error":
                         this.disabled = null;
                         break;
+                    default:
+                        this.disabled = 1;
                 }
+            });
+        var vm = this;
+        window.axios.get('/messages')
+            .then(function (response) {
+                vm.messages = response.data;
             });
     }
 });

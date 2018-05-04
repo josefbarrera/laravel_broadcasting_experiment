@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/scan', 'HomeController@scanRepo');
+Route::get('/messages', 'HomeController@getLatestMessages');

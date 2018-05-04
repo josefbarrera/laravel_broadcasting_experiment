@@ -17242,7 +17242,13 @@ var app = new Vue({
                 case "error":
                     _this.disabled = null;
                     break;
+                default:
+                    _this.disabled = 1;
             }
+        });
+        var vm = this;
+        window.axios.get('/messages').then(function (response) {
+            vm.messages = response.data;
         });
     }
 });
@@ -54555,7 +54561,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var type_class = "list-group-item-";
             switch (type) {
                 case "start":
-                    type_class += "primary";
+                    type_class += "info";
                     break;
                 case "end":
                     type_class += "success";
@@ -54564,7 +54570,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     type_class += "danger";
                     break;
                 default:
-                    type_class += "info";
+                    type_class += "primary";
             }
             return type_class;
         }
